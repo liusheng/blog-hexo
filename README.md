@@ -19,7 +19,6 @@ cd blog-hexo
 npm install
 npm install hexo-deploy-git --save
 hexo clean
-hexo g
-hexo d
+hexo d -g
 ```
 
