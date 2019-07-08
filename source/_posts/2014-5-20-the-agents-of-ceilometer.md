@@ -19,7 +19,7 @@ ceilometer主要由四个服务组成：
 - ceilometer-compute-agent，这个组件运行在compute（nova）节点上，该组件用来收集计算节点上的信息，通过Stevedore管理了一组pollster插件， 分别用来获取虚拟机的CPU, Disk IO, Network IO, Instance这些信息，值得一提的是这些信息大部分是通过调用Hypervisor的API来获取的， 目前，Ceilometer仅提供了Libvirt的API。
 
 整个ceilometer的逻辑架构如下图：
-![](/images/2014-5-20-the-agents-of-ceilometer/1.png)
+![ceilometer的逻辑架构](1.png)
 
 详细信息可以参考：[ceilometer开发者文档](http://docs.openstack.org/developer/ceilometer/architecture.html)
 
@@ -132,7 +132,7 @@ ps：关于setup.py和setu.cfy，可以参考这里[这里](http://yansu.org/201
 compute-agent的接口基本上和central-agent的一致，主要获取虚拟机的相关信息，由于compute是运行在每一个compute节点上的，所以compute-agent获取的信息是以本节点上的虚拟机为主体的，即在其poll_and_publish方法中首先调用novaclient的instance_get_all_by_host接口获取到该节点上所有虚拟机列表，最终对每一个虚拟机执行pollster对象列表中的get_samples方法。（这里与前面有所不同的是多了一层循环，首先遍历instances，再遍历pollsters）
 
 compute-agent的pollster在ceilmeter代码中的结构比较清晰，如下图：
-![](/images/2014-5-20-the-agents-of-ceilometer/2.jpg)
+![compute-agent的pollster](2.jpg)
 
 这里可以看出主要获取了虚拟机的cpu、disk、net，其中instance pollster主要是虚拟机自身的信息,包括flavor信息、name、type等。
 

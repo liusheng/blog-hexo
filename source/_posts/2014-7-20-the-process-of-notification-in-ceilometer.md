@@ -27,7 +27,7 @@ Ceilometer实现的Plugin框架依赖setuptools的Dynamic Discovery of Services 
 
 下面引用一下ceilometer官方开发者文档中的数据采集流程图：
 
-![](/images/2014-7-20-the-process-of-notification-in-ceilometer/1.png)  
+![](1.jpg)  
 
 图中绿色的箭头所指向的即为openstack中notifications的消息走向。
 
